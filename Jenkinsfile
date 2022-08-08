@@ -6,7 +6,6 @@ pipeline {
                  script{
                      git branch: 'test', credentialsId: 'ayushi', url: 'https://github.com/ayushi212001/weather-app.git'
                      sh "sudo snap install yq"
-
                  }
              }
          }        
@@ -20,8 +19,8 @@ pipeline {
                         dir('public'){
                            sh "pwd" 
                            sh "ls"
-                           sh "sudo yq -i '.authService.tag = \"v2\"' $WORKSPACE/public/values.yaml"
-                           sh "sudo yq -i '.accountingService.tag = \"v2\"' values.yaml"
+                           sh "sudo yq -i \'.authService.tag = \"v2\"\' $WORKSPACE/public/values.yaml"
+                           sh "sudo yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
                            sh "sudo git add ."  
                            sh "sudo git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
@@ -29,14 +28,8 @@ pipeline {
                            }    
                         } 
                      }  
-
-
                  }
              }
          }
-                
-                          
-            
-         
     }
 }    
