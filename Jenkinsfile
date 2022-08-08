@@ -20,8 +20,8 @@ pipeline {
                         dir('public'){
                            sh "pwd" 
                            sh "ls"
-                           sh "sudo yq -i values.yaml '.authService.tag.value' 'v2' "
-                           sh "sudo yq -i '.accountingService.tag = v2' $WORKSPACE/public/values.yaml"
+                           sh "sudo yq -i $WORKSPACE/public/values.yaml '.authService.tag.value' 'v2' "
+                           sh "sudo yq -i '.accountingService.tag = v2' values.yaml"
                            sh "sudo git add ."  
                            sh "sudo git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
