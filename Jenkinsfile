@@ -19,7 +19,7 @@ pipeline {
                         dir('public'){
                            sh "pwd" 
                            sh "ls"
-                           sh "sudo yq -i \'.authService.tag = \"v2\"\' $WORKSPACE/public/values.yaml"
+                           sh "sudo yq -i \'.authService.tag = \"v2\"\' values.yaml"
                            sh "sudo yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
                            sh "sudo git add ."  
                            sh "sudo git commit -m 'updated values'"
