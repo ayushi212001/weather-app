@@ -21,14 +21,6 @@ pipeline {
                         git branch: 'main', credentialsId: 'ayushi', url: 'https://github.com/ayushi212001/register.git'
                         sh "pwd"
                         dir('public'){
-                           sh "pwd" 
-                           sh "ls"
-                           sh "cat values.yaml"
-		           sh "yq -i '
-				  .a.b[0].c = "cool" |
-				  .x.y.z = "foobar" |
-				  .person.name = strenv(NAME)
-				' file.yaml"
                            sh """
 			        yq -i '
 				   .authService.tag = strenv(BUILD_NUMBER) |
