@@ -21,7 +21,7 @@ pipeline {
                            sh "pwd" 
                            sh "ls"
                            sh "cat values.yaml"
-                           sh "yq -i '.authService.tag = '${BUILD_NUMBER}'' values.yaml"
+                           sh "yq -i ''.authService.tag = \"${BUILD_NUMBER}\"'' values.yaml"
                            //sh "yq -i '.authService.tag = \"v2\"' values.yaml"
                            //sh "yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
                            sh "git add ."  
