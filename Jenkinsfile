@@ -21,7 +21,7 @@ pipeline {
                            sh "pwd" 
                            sh "ls"
                            sh "cat values.yaml"
-                           sh "yq -i \"'.authService.tag = \"\"${BUILD_NUMBER}\"\"'\" values.yaml"
+                           sh "yq -i \"'.authService.tag = \""${BUILD_NUMBER}\""'\" values.yaml"
                            sh "git add ."  
                            sh "git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
