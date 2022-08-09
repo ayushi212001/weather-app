@@ -22,7 +22,7 @@ pipeline {
                            sh "ls"
                            sh "cat values.yaml"
                            sh """
-			                yq -i '.authService.tag = \"${BUILD}\"' values.yaml
+			                yq -i '.authService.tag = \"${BUILD_NUMBER}\"' values.yaml
 			                """
                            sh "git add ."  
                            sh "git commit -m 'updated values'"
