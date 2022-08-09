@@ -24,8 +24,8 @@ pipeline {
                            sh """
 			                yq -i '.authService.tag = \"${BUILD_NUMBER}\"' values.yaml
 			                """
-                           sh "git add ."  
-                           sh "git commit -m 'updated values'"
+                           sh "sudo git add ."  
+                           sh "sudo git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ayushi212001/register.git')
                            }    
