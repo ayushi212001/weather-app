@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment{
+	BUILD_NUMBER=${BUILD_NUMBER}
+    }
     stages{
          stage('helm-clone'){
              steps{
@@ -21,9 +24,17 @@ pipeline {
                            sh "pwd" 
                            sh "ls"
                            sh "cat values.yaml"
+		           sh "yq -i '
+				  .a.b[0].c = "cool" |
+				  .x.y.z = "foobar" |
+				  .person.name = strenv(NAME)
+				' file.yaml"
                            sh """
-			                yq -i '.authService.tag = \"${BUILD_NUMBER}\"' values.yaml
-			                """
+			        yq -i '
+				   .authService.tag = strenv(BUILD_NUMBER) |
+				   .accountingService.tag = strenv(BUILD_NUMBER)
+				' values.yaml
+			      """
                            sh "sudo git add ."  
                            sh "sudo git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
