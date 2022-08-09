@@ -6,7 +6,7 @@ pipeline {
                  script{
                      git branch: 'test', credentialsId: 'ayushi', url: 'https://github.com/ayushi212001/weather-app.git'
                      //sh "sudo snap remove yq"
-                     sh "sudo wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64 -O /usr/bin/yq && sudo chown jenkins:jenkins /usr/bin/yq && sudo chmod +x /usr/bin/yq"
+                     sh "sudo wget https://github.com/mikefarah/yq/releases/download/v4.27.2/yq_linux_amd64 -O /usr/bin/yq && sudo chown jenkins:jenkins /usr/bin/yq && sudo chmod +x /usr/bin/yq"
                  }
              }
          }        
