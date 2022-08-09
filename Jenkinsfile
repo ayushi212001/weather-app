@@ -5,7 +5,8 @@ pipeline {
              steps{
                  script{
                      git branch: 'test', credentialsId: 'ayushi', url: 'https://github.com/ayushi212001/weather-app.git'
-                     sh "snap install yq"
+                     //sh "snap install yq"
+                     "sh wget https://github.com/mikefarah/yq/releases/download/v4.2.0/yq_linux_amd64 -O /usr/bin/yq && chown jenkins:jenkins /usr/bin/yq && chmod +x /usr/bin/yq"
                  }
              }
          }        
@@ -21,9 +22,9 @@ pipeline {
                            sh "ls"
                            sh "cat values.yaml"
                            sh "yq -i \'.authService.tag = \"v2\"\' values.yaml"
-                           sh "sudo yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
-                           sh "sudo git add ."  
-                           sh "sudo git commit -m 'updated values'"
+                           sh "yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
+                           sh "git add ."  
+                           sh "git commit -m 'updated values'"
                            withCredentials([usernamePassword(credentialsId: 'ayushi', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                                sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/ayushi212001/register.git')
                            }    
