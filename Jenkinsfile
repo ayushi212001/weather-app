@@ -19,6 +19,7 @@ pipeline {
                         dir('public'){
                            sh "pwd" 
                            sh "ls"
+                           sh "cat values.yaml"
                            sh "sudo yq -i \'.authService.tag = \"v2\"\' values.yaml"
                            sh "sudo yq -i \'.accountingService.tag = \"v2\"\' values.yaml"
                            sh "sudo git add ."  
